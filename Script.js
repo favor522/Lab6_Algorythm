@@ -41,6 +41,7 @@ class StackLinkedList {
     const removedNode = this.top;
     this.top = removedNode.next;
     removedNode.next = null;
+    removedNode.data = null;
     this.size--;
     console.log(`Удален элемент: ${removedNode.data} (связный список)`);
     return removedNode.data;
@@ -71,34 +72,24 @@ class StackLinkedList {
     }
   }
 
-  swapFirstAndLast() {
-    if (this.size < 2) {
-        console.log("Слишком мало элементов для обмена (связный список)");
-        return;
-    }
-    
-    let firstNode = this.top;
-    let lastNode = null;
-    let secondToLast = null;
+     swapFirstAndLast() {
+       if (this.size < 2) {
+           console.log("Слишком мало элементов для обмена (связный список)");
+           return;
+       }
 
-    let current = this.top;
-    while (current.next) {
-        secondToLast = current;
-        current = current.next;
-    }
-    lastNode = current;
+       let firstNode = this.top;
+       let lastNode = this.top;
+       while (lastNode.next) {
+           lastNode = lastNode.next;
+       }
 
-    secondToLast.next = firstNode;
-    let temp = firstNode.next;
-    firstNode.next = null;
-    lastNode.next = temp;
-    this.top = lastNode;
-    
-    secondToLast.next = lastNode.next;
-    lastNode.next = temp;
-    
-    console.log("Первый и последний элементы поменяны местами (связный список)");
-}
+       let temp = firstNode.data;
+       firstNode.data = lastNode.data;
+       lastNode.data = temp;
+
+       console.log("Первый и последний элементы поменяны местами (связный список)");
+  }
 }
 class StackArray {
   constructor() {
@@ -164,7 +155,7 @@ class StackArray {
   }
 }
 
-  console.log("Демонстрация работы со стеком (связный список):");
+  console.log("Работа со стеком (связный список):");
   const stackLinkedList = new StackLinkedList();
   stackLinkedList.createStack();
   stackLinkedList.push(10);
@@ -178,7 +169,7 @@ class StackArray {
   stackLinkedList.pushNNumbers([5, 15, 25]);
   stackLinkedList.printStack();
 
-  console.log("\nДемонстрация работы со стеком (массив):");
+  console.log("\nРабота со стеком (массив):");
   const stackArray = new StackArray();
   stackArray.createStack();
   stackArray.push(10);
